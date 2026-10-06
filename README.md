@@ -2,7 +2,7 @@
 
 <div align="center">
 
-# 🏭 JEV Factorio Mission Control
+# JEV Factorio Mission Control
 
 **The live OBS broadcast overlay for the JEV AI Factorio stream —
 captured exactly as deployed, and traced back to its source.**
@@ -10,8 +10,7 @@ captured exactly as deployed, and traced back to its source.**
 [![Deployed commit](https://img.shields.io/badge/deployed-761ffc8-2ea44f)](https://github.com/CompleteDotTech/jev-factorio-agent/commit/761ffc8)
 [![Upstream](https://img.shields.io/badge/upstream-jev--factorio--agent-blue)](https://github.com/CompleteDotTech/jev-factorio-agent)
 [![Factorio](https://img.shields.io/badge/Factorio-2.0.77-orange)](#the-current-run)
-[![Runtime](https://img.shields.io/badge/Python-stdlib_only-3776AB?logo=python&logoColor=white)](#-running-the-overlay-locally)
-[![Dashboard](https://img.shields.io/badge/dashboard-read--only-lightgrey)](#-how-the-data-flows)
+[![Runtime](https://img.shields.io/badge/Python-stdlib_only-3776AB?logo=python&logoColor=white)](#running-the-overlay-locally)
 
 <br>
 
@@ -27,7 +26,7 @@ on the left combines verified controller goals and research milestones.*
 
 ---
 
-## 📖 What this repository is
+## What this repository is
 
 This is a **snapshot of a live deployment**, not an actively developed source tree. Every path
 mirrors the live filesystem it was captured from: `obs-production/` is the OBS VM
@@ -39,24 +38,24 @@ The current deployment is jev-factorio-agent
 [`761ffc8`](https://github.com/CompleteDotTech/jev-factorio-agent/commit/761ffc8),
 live since **2026-09-27 02:09Z**.
 
-## 🗺️ Where everything came from
+## Where everything came from
 
 | Layer | Location on the live system | In this repo |
 | --- | --- | --- |
-| 🖥️ Overlay web app (package `jev_factorio/`) | `obs-production` VM, `/opt/jev-mission-control/jev_factorio/` | [`obs-production/opt/jev-mission-control/jev_factorio/`](obs-production/opt/jev-mission-control/jev_factorio/) |
-| 🧱 Item icons (`--icon-dir`) | `/opt/jev-mission-control/icons/`, copied from Factorio 1.1.110 `data/base/graphics/icons` | **Not included** — these are Wube game assets |
-| ⚙️ Overlay service (`127.0.0.1:8765`) | `/etc/systemd/system/jev-mission-control.service` | [`obs-production/etc/systemd/system/`](obs-production/etc/systemd/system/) |
-| 🎬 OBS scene collection `STS2`, scene **JEV Mission Control** | `~ubuntu/.config/obs-studio/basic/scenes/STS2.json` | [`obs-production/home/ubuntu/.config/...`](obs-production/home/ubuntu/.config/obs-studio/basic/scenes/) (SRT passphrases redacted) |
-| 📜 OBS Lua scripts, media sources, relay, maintenance art | `~ubuntu/jev-obs/` | [`obs-production/home/ubuntu/jev-obs/`](obs-production/home/ubuntu/jev-obs/) |
-| 📡 Telemetry mirror (controller → OBS VM, every 3 s) | Train host, `~completetrain/factorio-controller-replacement/` + user systemd unit | [`train/`](train/) |
-| 🎨 Generated art | see above | [`art/`](art/) |
+| Overlay web app (package `jev_factorio/`) | `obs-production` VM, `/opt/jev-mission-control/jev_factorio/` | [`obs-production/opt/jev-mission-control/jev_factorio/`](obs-production/opt/jev-mission-control/jev_factorio/) |
+| Item icons (`--icon-dir`) | `/opt/jev-mission-control/icons/`, copied from Factorio 1.1.110 `data/base/graphics/icons` | **Not included** — these are Wube game assets |
+| Overlay service (`127.0.0.1:8765`) | `/etc/systemd/system/jev-mission-control.service` | [`obs-production/etc/systemd/system/`](obs-production/etc/systemd/system/) |
+| OBS scene collection `STS2`, scene **JEV Mission Control** | `~ubuntu/.config/obs-studio/basic/scenes/STS2.json` | [`obs-production/home/ubuntu/.config/...`](obs-production/home/ubuntu/.config/obs-studio/basic/scenes/) (SRT passphrases redacted) |
+| OBS Lua scripts, media sources, relay, maintenance art | `~ubuntu/jev-obs/` | [`obs-production/home/ubuntu/jev-obs/`](obs-production/home/ubuntu/jev-obs/) |
+| Telemetry mirror (controller → OBS VM, every 3 s) | Train host, `~completetrain/factorio-controller-replacement/` + user systemd unit | [`train/`](train/) |
+| Generated art | see above | [`art/`](art/) |
 
 The OBS browser source loads `http://127.0.0.1:8765/?studio=1&v=d02486c`. OBS draws that page
 over the native game video source, which sits under the transparent **OBS COMPOSITION** area.
 After a deploy, reload the page with the source's **Refresh** button in OBS: the server sends
 `no-store`, but a page that is already running keeps its old scripts until it reloads.
 
-## 🔀 How the data flows
+## How the data flows
 
 ```mermaid
 flowchart LR
@@ -88,7 +87,7 @@ Its 48-hour run began at **2026-09-27 23:45Z** and is scheduled to end at **2026
 The tracked `campaign.conf` records the session selected by the live Train telemetry service.
 The research sidecar is generated runtime data and is not stored in this snapshot.
 
-## 🚀 Running the overlay locally
+## Running the overlay locally
 
 No build step, no dependencies — the dashboard uses only the Python standard library.
 
@@ -103,7 +102,7 @@ Then open **`http://127.0.0.1:8765/?studio=1`** (the 1920×1080 studio layout OB
 **`/?overlay=1`**. A missing log file is fine; the page shows its "awaiting evidence" state.
 Without `--icon-dir`, inventory slots and events show item names instead of icons.
 
-## 📦 Deployment record
+## Deployment record
 
 `jev_factorio/DEPLOYED_COMMIT` records the deployed commit on the VM. The unit runs
 `python3 -m jev_factorio.dashboard ... --icon-dir /opt/jev-mission-control/icons`.
@@ -119,10 +118,10 @@ It adds four PRs to `16ab385`:
 | **#104** | The objective tree shows 11 milestones instead of three fixed goals. The controller's goals keep their verified ticks. Base-game research on the way to the rocket (steam power, the science packs, oil processing, the rocket silo) shows the tick it was first seen. Research already done when the dashboard started watching shows as "Researched", with no tick. |
 | **#105** | Milestone names never clip in the OBS browser source. |
 | **#106** | The top bar shows **RUN TIME** where it used to show the **CAMPAIGN CUTOFF** countdown. It counts up from the supervisor's `started_at` and stops at the cutoff. |
-| **#109** | Shows where the run is on the game's own research tree, for Factorio 1.1, 2.0.x and Space Age. A top-bar research strip shows the current research, done/total technologies per science pack, and the count to the goal. The objective milestones come from the tree. The tree arrives as a `research-catalog.json` sidecar that the controller writes at startup and the telemetry mirror copies over (see [data flow](#-how-the-data-flows)). The pinned production controller (`f89407d`) predates the exporter; for the fresh game started at 2026-09-27 23:45Z, a one-time read-only export from the same upstream code was placed in the run's supervision directory. The strip is now visible; controller telemetry supplies current research progress. A new world, game version, or mod set needs a fresh export until the controller is updated. |
+| **#109** | Shows where the run is on the game's own research tree, for Factorio 1.1, 2.0.x and Space Age. A top-bar research strip shows the current research, done/total technologies per science pack, and the count to the goal. The objective milestones come from the tree. The tree arrives as a `research-catalog.json` sidecar that the controller writes at startup and the telemetry mirror copies over (see [data flow](#how-the-data-flows)). The pinned production controller (`f89407d`) predates the exporter; for the fresh game started at 2026-09-27 23:45Z, a one-time read-only export from the same upstream code was placed in the run's supervision directory. The strip is now visible; controller telemetry supplies current research progress. A new world, game version, or mod set needs a fresh export until the controller is updated. |
 
 <details>
-<summary><strong>🕑 Earlier deployments and rollback copies</strong></summary>
+<summary><strong>Earlier deployments and rollback copies</strong></summary>
 
 <br>
 
@@ -160,7 +159,7 @@ The previous deployment did not include PR #68's launch-readiness panel or
 
 </details>
 
-## 📸 Screenshots & generated art
+## Screenshots & generated art
 
 <div align="center">
 
@@ -181,7 +180,7 @@ The previous deployment did not include PR #68's launch-readiness panel or
 All three images live in [`art/`](art/), with each one's purpose, size, deploy location and
 exact generation prompt recorded in [`art/README.md`](art/README.md).
 
-## 🔒 Redactions
+## Redactions
 
 The SRT listener passphrases in `STS2.json`, `jev-obs/media.json` and
 `jev-obs/factorio-b-media.json` are replaced with `REDACTED`. None of these files contains a
