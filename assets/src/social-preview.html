@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><title>Jev Mission Control — Social Preview</title>
+<style>
+@font-face{font-family:Inter;src:url('fonts/inter-var.woff2') format('woff2');font-weight:700;font-display:block}
+@font-face{font-family:VT323;src:url('fonts/vt323.woff2') format('woff2');font-weight:400;font-display:block}
+:root{--pink:#F386A1;--ink:#1E1E1E;--magenta:#E551BA;--grey:#DEDEDE;--paper:#FEFEFE}
+*{box-sizing:border-box}html,body{margin:0;width:1280px;height:640px;overflow:hidden}body{background:var(--pink);color:var(--ink);font:26px VT323,'JetBrains Mono',monospace}
+.texture{position:absolute;inset:0;width:1280px;height:640px}.frame{position:absolute;inset:16px;border:1px solid var(--ink)}.crop{position:absolute;width:16px;height:16px;border:solid var(--ink)}.tl{top:7px;left:7px;border-width:1px 0 0 1px}.tr{top:7px;right:7px;border-width:1px 1px 0 0}.bl{bottom:7px;left:7px;border-width:0 0 1px 1px}.br{bottom:7px;right:7px;border-width:0 1px 1px 0}
+.tag{position:absolute;left:44px;top:42px;padding:6px 12px;background:var(--ink);color:var(--pink);border:1px dotted var(--pink);outline:2px solid var(--ink);font-size:23px;letter-spacing:1.4px}
+h1{position:absolute;left:40px;top:101px;margin:0;font:700 88px/1.08 Inter,sans-serif;letter-spacing:-5px;white-space:nowrap}
+.subtitle{position:absolute;top:214px;left:43px;background:var(--ink);color:var(--paper);padding:9px 15px;font-size:30px;line-height:32px;white-space:nowrap}
+.window{position:absolute;left:44px;top:303px;width:430px;height:273px;background:var(--grey);border:2px solid var(--ink);box-shadow:inset 0 0 0 2px var(--paper),3px 3px 0 var(--ink)}
+.bar{height:31px;background:var(--ink);color:var(--paper);padding:1px 10px;display:flex;justify-content:space-between;font-size:25px;line-height:28px;letter-spacing:1px}.controls{letter-spacing:4px}
+.preview{position:relative;margin:12px auto;width:384px;height:216px;background:var(--pink);border:1px solid var(--ink);outline:2px solid var(--paper);display:flex;align-items:center;justify-content:center}.preview:before,.preview:after{content:'';position:absolute;background:var(--ink);opacity:.4}.preview:before{width:1px;height:100%}.preview:after{width:100%;height:1px}.placeholder{z-index:1;background:var(--pink);border:1px solid var(--ink);padding:7px 15px;font-size:25px}.signal{display:inline-block;width:9px;height:9px;background:var(--magenta);border:1px solid var(--ink);margin-right:9px}
+.robot{position:absolute;left:727px;top:299px;width:410px;height:276px;shape-rendering:crispEdges}
+footer{position:absolute;bottom:40px;right:44px;font-size:25px;line-height:25px;letter-spacing:.5px}
+</style></head><body>
+<svg class="texture" aria-hidden="true"><defs><pattern id="dots" width="6" height="6" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".65" fill="#1E1E1E" opacity=".4"/></pattern><pattern id="dense" width="4" height="4" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r=".9" fill="#1E1E1E" opacity=".4"/></pattern></defs><rect width="1280" height="640" fill="url(#dots)"/><g fill="url(#dense)"><circle cx="1174" cy="80" r="105"/><circle cx="665" cy="536" r="90"/><circle cx="959" cy="396" r="147"/></g></svg>
+<div class="frame"></div><i class="crop tl"></i><i class="crop tr"></i><i class="crop bl"></i><i class="crop br"></i>
+<div class="tag">JEVPLAY.GAMES/MISSION-CONTROL</div>
+<h1>Jev Mission Control</h1>
+<div class="subtitle">The Jev Factorio stream overlay, traced to source</div>
+<section class="window" aria-label="Program window"><div class="bar"><span>PROGRAM</span><span class="controls">_ x</span></div><div class="preview"><span class="placeholder"><i class="signal"></i>16:9 / PROGRAM FEED</span></div></section>
+<svg class="robot" viewBox="0 0 247 166" role="img" aria-label="Jev robot wearing a headset at a console"><g fill="#1E1E1E"><path d="M90 8h6v21h-6zM85 3h16v10H85zM65 26h69v6h12v12h7v49h-7v12h-18v12h17v9h23v19H44v-22h18v-12h18v-6H58V93h-9V46h7V33h9z"/><path d="M42 48h14v42H42zM147 49h14v41h-14zM151 85h6v20h-32v-6h26z"/></g><g fill="#F386A1"><path d="M66 33h67v6h8v12h5v36h-7v11H63V87h-7V50h6V39h4z"/><path d="M84 110h39v10h12v25H68v-21h16zM49 126h18v15H49zM136 126h24v15h-24z"/></g><path fill="#1E1E1E" d="M73 44h57v6h7v32h-7v7H70v-7h-7V53h10z"/><g fill="#F386A1"><path d="M77 63h5v-5h9v5h5v10h-5v-8h-9v8h-5zM107 63h5v-5h9v5h5v10h-5v-8h-9v8h-5z"/></g><g fill="#1E1E1E"><path d="M89 123h27v5H89zM100 131h8v7h-8zM121 96h12v10h-12zM18 140h209v7h9v16H10v-16h8z"/></g><path fill="#F386A1" d="M23 146h199v10H23z"/><g fill="#1E1E1E"><path d="M31 148h10v4H31zM46 148h10v4H46zM61 148h10v4H61zM76 148h10v4H76zM151 148h30v4h-30zM192 148h18v4h-18zM178 113h6v29h-6zM173 108h16v8h-16z"/></g></svg>
+<footer>jevplay.games</footer>
+<script>document.fonts.ready.then(()=>{document.documentElement.dataset.fontsReady='true'});</script>
+</body></html>

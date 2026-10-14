@@ -1,20 +1,23 @@
-<p align="center"><img src="assets/banner.jpg" alt="Pixel-art robot Jev at a mission-control console in front of a wall of glowing dials, gauges and screens" width="100%"></p>
+<p align="center"><img src="assets/banner.png" alt="Pink and ink pixel-window banner reading Jev Mission Control, with the Jev robot in a headset at a console beside PROGRAM, CURRENT OBJECTIVE and RUN TIME windows." width="100%"></p>
 
 <div align="center">
 
-# JEV Factorio Mission Control
+# Jev Factorio Mission Control
 
-**The live OBS broadcast overlay for the JEV AI Factorio stream —
+**The live OBS broadcast overlay for the Jev Factorio stream —
 captured exactly as deployed, and traced back to its source.**
 
-[![Deployed commit](https://img.shields.io/badge/deployed-761ffc8-2ea44f)](https://github.com/CompleteDotTech/jev-factorio-agent/commit/761ffc8)
-[![Upstream](https://img.shields.io/badge/upstream-jev--factorio--agent-blue)](https://github.com/CompleteDotTech/jev-factorio-agent)
-[![Factorio](https://img.shields.io/badge/Factorio-2.0.77-orange)](#the-current-run)
-[![Runtime](https://img.shields.io/badge/Python-stdlib_only-3776AB?logo=python&logoColor=white)](#running-the-overlay-locally)
+[![Deployed: 761ffc8](https://img.shields.io/badge/Deployed-761ffc8-F386A1?style=flat-square&labelColor=1E1E1E)](https://github.com/jevplays-games/jev-factorio-agent/commit/761ffc8)
+[![Upstream: jev-factorio-agent](https://img.shields.io/badge/Upstream-jev--factorio--agent-F386A1?style=flat-square&labelColor=1E1E1E)](https://github.com/jevplays-games/jev-factorio-agent)
+[![Factorio: 2.0.77](https://img.shields.io/badge/Factorio-2.0.77-F386A1?style=flat-square&labelColor=1E1E1E)](#the-current-run)
+[![Runtime: Python stdlib only](https://img.shields.io/badge/Python-stdlib_only-F386A1?style=flat-square&labelColor=1E1E1E&logo=python&logoColor=white)](#running-the-overlay-locally)
+[![License: MIT](https://img.shields.io/badge/License-MIT-DEDEDE?style=flat-square&labelColor=1E1E1E)](LICENSE)
+
+[What this repository is](#what-this-repository-is) · [Where everything came from](#where-everything-came-from) · [How the data flows](#how-the-data-flows) · [Running locally](#running-the-overlay-locally) · [Deployment record](#deployment-record) · [Screenshots](#screenshots--generated-art)
 
 <br>
 
-![Live JEV Mission Control overlay, OBS program output](art/jev-mission-control-overlay-live.png)
+![Live Jev Mission Control overlay, OBS program output](art/jev-mission-control-overlay-live.png)
 
 *The full program output as streamed (scene **JEV Mission Control**, 1920×1080), captured from
 OBS on 2026-09-28 00:33Z with `761ffc8` deployed and the fresh Factorio 2.0.77 game running.
@@ -28,14 +31,18 @@ on the left combines verified controller goals and research milestones.*
 
 ## What this repository is
 
+> [!NOTE]
+> This is a snapshot of a live deployment. It is not developed here: code changes go upstream,
+> and secrets such as the SRT passphrases are redacted (see [Redactions](#redactions)).
+
 This is a **snapshot of a live deployment**, not an actively developed source tree. Every path
 mirrors the live filesystem it was captured from: `obs-production/` is the OBS VM
 (`/etc`, `/opt`, `/home/ubuntu`), and `train/` is the Train host (`~completetrain`). Code changes
-happen upstream in [`CompleteDotTech/jev-factorio-agent`](https://github.com/CompleteDotTech/jev-factorio-agent)
+happen upstream in [`jevplays-games/jev-factorio-agent`](https://github.com/jevplays-games/jev-factorio-agent)
 (`src/jev_factorio/`); this repo records **what is actually deployed and where it came from**.
 
 The current deployment is jev-factorio-agent
-[`761ffc8`](https://github.com/CompleteDotTech/jev-factorio-agent/commit/761ffc8),
+[`761ffc8`](https://github.com/jevplays-games/jev-factorio-agent/commit/761ffc8),
 live since **2026-09-27 02:09Z**.
 
 ## Where everything came from
@@ -70,9 +77,19 @@ flowchart LR
         DASH["jev-mission-control.service<br/>python3 -m jev_factorio.dashboard · :8765"]
     end
     subgraph OBS["OBS Studio"]
-        SRC["Browser source<br/>JEV Mission Control UI"]
+        SRC["Browser source<br/>#quot;JEV Mission Control UI#quot;"]
     end
     RUN --> MIRROR --> DATA --> DASH --> SRC --> TWITCH(("Twitch"))
+
+    classDef jev fill:#F386A1,stroke:#1E1E1E,color:#1E1E1E
+    classDef box fill:#DEDEDE,stroke:#1E1E1E,color:#1E1E1E
+    class DASH,SRC jev
+    class RUN,MIRROR,DATA,TWITCH box
+    style HERDR fill:#FEFEFE,stroke:#1E1E1E,color:#1E1E1E
+    style TRAIN fill:#FEFEFE,stroke:#1E1E1E,color:#1E1E1E
+    style OBSVM fill:#FEFEFE,stroke:#1E1E1E,color:#1E1E1E
+    style OBS fill:#FEFEFE,stroke:#1E1E1E,color:#1E1E1E
+    linkStyle default stroke:#E551BA
 ```
 
 The mirror copies `gameplay.jsonl` and `supervisor.json` every 3 seconds, and
@@ -110,7 +127,7 @@ Without `--icon-dir`, inventory slots and events show item names instead of icon
 **Current, from 2026-09-27 02:09Z:** `jev_factorio/` is an exact copy of
 `src/jev_factorio/{__init__,dashboard,dashboard_mission,research_catalog}.py` and
 `dashboard_assets/` at
-[`761ffc8`](https://github.com/CompleteDotTech/jev-factorio-agent/commit/761ffc8).
+[`761ffc8`](https://github.com/jevplays-games/jev-factorio-agent/commit/761ffc8).
 It adds four PRs to `16ab385`:
 
 | PR | What it changed |
@@ -145,7 +162,7 @@ was hashed and matched to the upstream repo's history
 (`src/jev_factorio/dashboard.py` and `dashboard_assets/`):
 
 - `dashboard.py`, `app.js`, `index.html` and `factory-steel.png` are byte-identical to commit
-  [`d02486c`](https://github.com/CompleteDotTech/jev-factorio-agent/commit/d02486c3612381927bd77c443c49f3bd8d3f5231)
+  [`d02486c`](https://github.com/jevplays-games/jev-factorio-agent/commit/d02486c3612381927bd77c443c49f3bd8d3f5231)
   ("Hide scrollbar chrome in OBS dashboard compositions", 2026-09-23).
 - `styles.css` has the same rules as `d02486c`, but the scrollbar-hiding block is appended at
   the end of the file instead of sitting mid-file. It was hot-patched before that commit.
@@ -165,7 +182,7 @@ The previous deployment did not include PR #68's launch-readiness panel or
 
 | Live program output | Offline / maintenance slate |
 | :---: | :---: |
-| [![Live JEV Mission Control overlay](art/jev-mission-control-overlay-live.png)](art/jev-mission-control-overlay-live.png) | [![Offline / maintenance slate](art/jev-factorio-maintenance-v1.png)](art/jev-factorio-maintenance-v1.png) |
+| [![Live Jev Mission Control overlay](art/jev-mission-control-overlay-live.png)](art/jev-mission-control-overlay-live.png) | [![Offline / maintenance slate](art/jev-factorio-maintenance-v1.png)](art/jev-factorio-maintenance-v1.png) |
 | Scene **JEV Mission Control** as streamed,<br>1920×1080, captured 2026-09-28 00:33Z | OBS scene **JEV - Maintenance**,<br>driven by `obs-maintenance-scene.lua` |
 
 <br>
@@ -178,7 +195,9 @@ The previous deployment did not include PR #68's launch-readiness panel or
 </div>
 
 All three images live in [`art/`](art/), with each one's purpose, size, deploy location and
-exact generation prompt recorded in [`art/README.md`](art/README.md).
+exact generation prompt recorded in [`art/README.md`](art/README.md). The README banner and the
+GitHub social preview live in [`assets/`](assets/), rendered from the HTML sources in
+[`assets/src/`](assets/src/).
 
 ## Redactions
 
@@ -189,8 +208,27 @@ OBS profile and browser cookie store. Recordings, runtime status files and backu
 profile are not included. The only screenshot is the program-output capture shown at the top of
 this README.
 
+## Repository layout
+
+```text
+obs-production/   the OBS VM, mirrored from its filesystem roots
+  etc/            systemd unit for jev-mission-control.service
+  opt/            /opt/jev-mission-control: the deployed jev_factorio/ package and older copies
+  home/ubuntu/    OBS scene collection STS2 and the jev-obs/ Lua scripts, relay and helpers
+train/            the Train host (~completetrain): the telemetry mirror and its systemd unit
+art/              generated art and the live program capture, with prompts in art/README.md
+assets/           README banner and social preview, with HTML sources and fonts in assets/src/
+```
+
+## Contributing
+
+Code changes belong upstream in
+[`jevplays-games/jev-factorio-agent`](https://github.com/jevplays-games/jev-factorio-agent).
+This repo only changes when the live deployment does, so the snapshot stays byte-faithful.
+
 ---
 
-<div align="center">
-<sub>Factorio is a trademark of Wube Software. This project isn't affiliated with Wube.</sub>
-</div>
+<p align="center">
+<sub>A jevplay.games project · Steward: CompleteTech LLC · MIT licensed<br>
+Not an official TypeSafe AI publication; the pink, ink and pixel-window styling is a nod to <a href="https://typesafe.ai">typesafe.ai</a>. Jev, System One and TypeSafe are their respective owners' names. Factorio is a trademark of Wube Software; this project isn't affiliated with Wube.</sub>
+</p>

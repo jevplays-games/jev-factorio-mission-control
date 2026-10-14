@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this repo is
 
-A **snapshot of a live deployment** of the JEV Factorio stream's OBS overlay, not an actively developed source tree. Paths mirror the live filesystem roots: `obs-production/` is the OBS VM (`/etc`, `/opt`, `/home/ubuntu`), `train/` is the Train host (`~completetrain`). The upstream source is `CompleteDotTech/jev-factorio-agent` (`src/jev_factorio/`). Code changes belong there. This repo records what is actually deployed and where it came from.
+A **snapshot of a live deployment** of the Jev Factorio stream's OBS overlay, not an actively developed source tree. Paths mirror the live filesystem roots: `obs-production/` is the OBS VM (`/etc`, `/opt`, `/home/ubuntu`), `train/` is the Train host (`~completetrain`). The upstream source is `jevplays-games/jev-factorio-agent` (`src/jev_factorio/`). Code changes belong there. This repo records what is actually deployed and where it came from.
 
 Keep it byte-faithful to the live system:
 - `obs-production/opt/jev-mission-control/jev_factorio/` must be an exact copy of the upstream commit named in `jev_factorio/DEPLOYED_COMMIT` (currently `761ffc8`). Don't reformat, lint, or "fix" these files.
